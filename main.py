@@ -36,3 +36,8 @@ def draw_scores():
     screen.blit(score1_text, (10, 10))
     screen.blit(score2_text), (WIDHT - score2_text.get_width() - 10, 10)
     
+# function for check collision
+def check_collision(ball, paddle):
+    if ball.colliderect(paddle):
+        return True
+    return False
