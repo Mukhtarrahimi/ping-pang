@@ -14,7 +14,7 @@ PADDLE_COLOR = (168, 85, 247)
 TEXT_COLOR = (241, 245, 249)        
 MIDLINE_COLOR = (100, 116, 139)    
 
-# initailize players Required
+# initialize players Required
 score1 = 0
 score2 = 0
 player1_name = "A"
@@ -27,3 +27,12 @@ ball_dy = BALL_SPEED * random.choice((1, -1))
 paddle1_dy = 0
 paddle2_dy = 0
 ball_in_motion = True
+
+# function for draw score
+def draw_scores():
+    font = pygame.font.Font(None, 36)
+    score1_text = font.render(f"{player1_name}: {score1}", True, TEXT_COLOR)
+    score2_text = font.render(f"{player2_name}: {score2}", True, TEXT_COLOR)
+    screen.blit(score1_text, (10, 10))
+    screen.blit(score2_text), (WIDHT - score2_text.get_width() - 10, 10)
+    
