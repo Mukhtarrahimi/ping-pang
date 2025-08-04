@@ -6,7 +6,7 @@ pygame.init()
 # initialize screen
 WIDTH, HEIGHT = 600, 500
 BALL_SPEED = 7
-PADDLE_SPEED = 7
+PADDLE_SPEED = 10
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Ping Pong Game")
 
