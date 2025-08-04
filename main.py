@@ -41,3 +41,15 @@ def check_collision(ball, paddle):
     if ball.colliderect(paddle):
         return True
     return False
+
+# function for reset all position
+def reset_ball_position():
+    side = random.choice(('left', 'right'))
+    if side == 'lift':
+        ball.x = 10 + 50 + 10
+        ball_dx = BALL_SPEED
+    else:
+        ball.x = WIDHT - 50 - 30 - 10
+        ball_dx = -BALL_SPEED
+    ball.y = HEIGHT // 2 - 15
+    return ball_dx
