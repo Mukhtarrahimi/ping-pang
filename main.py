@@ -19,7 +19,7 @@ score1 = 0
 score2 = 0
 player1_name = "A"
 player2_name = "B"
-ball = pygame.rect(WIDHT // 2 - 15, HEIGHT // 2 - 15, 30, 30)
+ball = pygame.Rect(WIDHT // 2 - 15, HEIGHT // 2 - 15, 30, 30)
 paddle1 = pygame.Rect(50, HEIGHT //2 - 60, 10, 120)
 paddle2 = pygame.Rect(WIDHT - 60, HEIGHT // 2 - 60 , 10, 120)
 ball_dx = BALL_SPEED * random.choice((1, -1))
@@ -55,3 +55,74 @@ def reset_ball_position():
         ball_dx = -BALL_SPEED
     ball.y = HEIGHT // 2 - 15
     return ball_dx
+
+# runnig loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                paddle2_dy = -PADDLE_SPEDD
+            elif event.key == pygame.K_DOWN:
+                paddle2_dy = PADDLE_SPEDD
+            elif event.key == pygame.K_SPACE:
+                ball_in_motion = True
+        elif event.key == pygame.KEYUP:
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                paddle2_dy = 0
+                
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        paddle1_dy = -PADDLE_SPEDD
+    elif keys[pygame.K_s]:
+        paddle1_dy = PADDLE_SPEDD
+    else:
+        paddle1_dy = 0
+        
+    if ball_in_motion:
+        ball.x += ball_dx
+        ball.y += ball_dy
+    if ball.top <= 0 or ball.bottom >= HEIGHT:
+        ball_dy += -1
+    
+    if check_collision(ball, paddle1) or check_collision(ball, paddle2):
+        ball_dx += -1
+    if ball.left <= 0:
+        score2 += 1
+        if score2 == 5:
+            running = False
+        else:
+            ball_dx = reset_ball_position()
+            ball_in_motion = False
+    elif  ball.right >= WIDHT:
+        score1 += 1
+        if score1 == 5:
+            running = False
+        else:
+            ball_dx = reset_ball_position()
+            ball_in_motion = False
+    paddle1.y += paddle1_dy
+    paddle2.y += paddle2_dy
+    
+    if paddle1.top <= 0:
+        paddle1.top = 0
+    if paddle1.bottom >= HEIGHT:
+        paddle1.bottom = HEIGHT
+    if paddle2.top <= 0:
+        paddle2.top = 0
+    if paddle2.bottom >= HEIGHT:
+        paddle2.bottom = HEIGHT
+    
+    screen.fill(BACKGROUND_COLOR)
+    pygame.draw.rect(screen, PADDLE_COLOR, paddle1)
+    pygame.draw.rect(screen, PADDLE_COLOR, paddle1)
+    pygame.draw.ellipse(screen, BALL_COLOR, ball)
+    
+    draw_scores()
+    pygame.display.flip()
+    
+    pygame.time.delay(30)
+    
+pygame.quit()
