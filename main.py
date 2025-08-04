@@ -14,3 +14,16 @@ PADDLE_COLOR = (168, 85, 247)
 TEXT_COLOR = (241, 245, 249)        
 MIDLINE_COLOR = (100, 116, 139)    
 
+# initailize players Required
+score1 = 0
+score2 = 0
+player1_name = "A"
+player2_name = "B"
+ball = pygame.rect(WIDHT // 2 - 15, HEIGHT // 2 - 15, 30, 30)
+paddle1 = pygame.Rect(50, HEIGHT //2 - 60, 10, 120)
+paddle2 = pygame.Rect(WIDHT - 60, HEIGHT // 2 - 60 , 10, 120)
+ball_dx = BALL_SPEED * random.choice((1, -1))
+ball_dy = BALL_SPEED * random.choice((1, -1))
+paddle1_dy = 0
+paddle2_dy = 0
+ball_in_motion = True
