@@ -27,6 +27,8 @@ ball_dy = BALL_SPEED * random.choice((1, -1))
 paddle1_dy = 0
 paddle2_dy = 0
 ball_in_motion = True
+screen = pygame.display.set_mode(WIDHT, HEIGHT)
+pygame.display.set_caption("Ping Pang Game")
 
 # function for draw score
 def draw_scores():
